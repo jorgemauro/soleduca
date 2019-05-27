@@ -183,16 +183,8 @@ export default class PainelAnaliseInterna extends React.Component {
                 </Card>
                 }
                 {this.props.select===4
-                && <Card style={{
-                    width: '70%',
-                    height: '30%',
-                    display: 'flex',
-                    flexFlow: 'column',
-                    alignItems: 'center',
-                    padding: '1%',
-                }}>
-                    <Tabela onclick={()=>this.setState({detalhetabela:true})} cabecalho={['Number', 'Descrição','incidencia de erro']}rows={rowsIncidencia}/>
-                </Card>}
+                &&
+                    <Tabela onclick={()=>this.setState({detalhetabela:true})} cabecalho={['Number', 'Descrição','incidencia de erro']}rows={rowsIncidencia}/>}
                 {this.props.select===3&& <Card style={{
                     width: '70%',
                     height: '30%',

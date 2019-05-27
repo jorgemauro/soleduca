@@ -82,13 +82,13 @@ export default class DashboardManager extends React.Component{
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             <List>
-                                <ListItem button style={{color:'#ffffff'}} key='inicio' onClick={()=>this.setState({selected:4})}>
+                                <ListItem button style={{color:'#ffffff'}} key='inicio' onClick={()=>this.setState({selected:5})}>
                                     Desempenho - Série historica
                                 </ListItem>
-                                <ListItem button style={{color:'#ffffff'}} key='comparativa' onClick={()=>this.setState({selected:5})}>
+                                <ListItem button style={{color:'#ffffff'}} key='comparativa' onClick={()=>this.setState({selected:6})}>
                                     Desempenho por item
                                 </ListItem>
-                                <ListItem button style={{color:'#ffffff'}} key='comparativa' onClick={()=>this.setState({selected:6})}>
+                                <ListItem button style={{color:'#ffffff'}} key='comparativa' onClick={()=>this.setState({selected:7})}>
                                     Rankig de habilidades
                                 </ListItem>
                             </List>
@@ -97,12 +97,12 @@ export default class DashboardManager extends React.Component{
                 </div>
                 <div style={{
                     width: '80vw',
-                    backgroundColor: '#cccccc',
+                    backgroundColor: '#ffffff',
                     marginLeft: '20vw',
                     marginTop: "8vh",
                     padding: '1% 0'
                 }}>
-                    {this.state.selected < 4 && <PainelAnaliseInterna select={this.state.selected}/>}
+                    {this.state.selected < 5 && <PainelAnaliseInterna select={this.state.selected}/>}
                 </div>
             </div>
     );
