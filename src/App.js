@@ -4,6 +4,8 @@ import './App.css';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login';
+import DashboardManager from './pages/DashboardManager';
+import DashboardAluno from './pages/DashboardAluno';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -26,6 +28,8 @@ function App() {
                 <div>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/login" component={Login}/>
+                    <Route exact path="/dashboard" component={DashboardManager}/>
+                    <Route exact path="/AcessoAluno" component={DashboardAluno}/>
                 </div>
             </Router>
         </MuiThemeProvider>

@@ -57,3 +57,12 @@ h5{
   font-size: 2rem;
   margin:0;
 }
+.gradient{
+background: linear-gradient(to bottom right,#004265,#003b96)
+}
+.gradient-inverse{
+    background: linear-gradient(to bottom right, #003b96 20%,#004265)
+}
+.cardHover:hover{
+  cursor: pointer;
+}

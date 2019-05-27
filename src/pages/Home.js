@@ -11,18 +11,17 @@ function Home() {
     return (
         <div style={{height: '100vh', width: '100vwmax'}}>
             <Header/>
-            <div style={{backgroundColor:'#ffffff', width:'100%', height:'100%'}}>
-                <div style={{backgroundImage:  `url(${imgBack})`, backgroundSize:'100% 100%', width:'100%', height:'110%'}}/>
+            <div style={{backgroundColor:'#ffffff', width:'100%', height:'80%'}}>
+                <div style={{backgroundImage:  `url(${imgBack})`, backgroundSize:'100% 100%', width:'100%', height:'100%'}}/>
             </div>
             <div style={{position:'absolute', left:'10%', top:'30%', width:'25%'}}>
                 <h3 style={{color:'#004265'}}>TRI Soluções em educação</h3>
                 <h4>Melhore o desempenho dos seus alunos</h4>
                 <p>A solução proposta pela TRI proporciona a oportunidade de planejamento para melhor o desempenho dos alunos nos exames nacionais</p>
             </div>
-            <div style={{
+            <div className="gradient" style={{
                 width: '100%',
                 height: '50%',
-                backgroundColor: '#004265',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
