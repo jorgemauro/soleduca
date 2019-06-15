@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Home from './pages/Home';
+import Podserv from './pages/prodserv'
 import Login from './pages/Login';
 import DashboardManager from './pages/DashboardManager';
 import DashboardAluno from './pages/DashboardAluno';
@@ -27,6 +28,7 @@ function App() {
             <Router>
                 <div>
                     <Route exact path="/" component={Home}/>
+                    <Route exact path="/produtoseservicos" component={Podserv}/>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/dashboard" component={DashboardManager}/>
                     <Route exact path="/AcessoAluno" component={DashboardAluno}/>

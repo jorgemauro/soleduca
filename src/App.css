@@ -57,12 +57,35 @@ h5{
   font-size: 2rem;
   margin:0;
 }
+.esquerdadireta{
+  background: linear-gradient(270deg, rgba(196, 196, 196, 0)100%, #004265 0% );
+}
 .gradient{
-background: linear-gradient(to bottom right,#004265,#003b96)
+  background: linear-gradient(100.73deg, #7892FE 0.34%, #004265 100%);
 }
 .gradient-inverse{
     background: linear-gradient(to bottom right, #003b96 20%,#004265)
 }
 .cardHover:hover{
   cursor: pointer;
+}
+.upObj{
+  animation: leftPop 1s ease-in-out;
+}
+li:before
+{
+  content: '✔';
+  margin-left: -1em;
+  margin-right: .100em;
+}
+@keyframes leftPop {
+  0%{
+    opacity: 0;
+    transform:  translateY(100%);
+  }
+  100%{
+    opacity: 100%;
+    transform:translateY(0%);
+  }
+
 }

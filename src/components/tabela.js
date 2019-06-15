@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import redac from '../img/graficos/readac.png';
 
 const styles = theme => ({
     root: {
@@ -23,20 +24,21 @@ function Tabela(props) {
     const {classes} = props;
 
     return (
-        <Paper>
-            <Table onClick={()=>this.props.onclick}>
-                <TableHead>
+        <Paper style={{marginTop:'5%'}}>
+            {props.title?<div style={{width:'100%', fontWeight:'bolder',color:'#3E6BB5', fontSize:'20px', padding:'2% 0',textAlign:'center'}}>{props.title}</div>:''}
+            <Table onClick={()=>props.onclick}>
+                <TableHead style={{backgroundColor:'#3E6BB5'}}>
                     <TableRow>
                         {props.cabecalho.map((item) =>
-                            <TableCell>{item}</TableCell>)}
+                            <TableCell style={{color:'#ffffff', fontWeight:'bolder', fontSize:'16px'}} align={props.align?props.align:''} variant={'head'}>{item}</TableCell>)}
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {props.rows.map(row => (
                         <TableRow key={row.id}>
                             {row.cel.map(cel=>
-                            <TableCell component="th" scope="row">
-                                {cel}
+                            <TableCell size={props.size?props.size:'small'} align={props.align?props.align:''} component="th" scope="row">
+                                {cel==='Redação'?<a href={redac}  target="_blank">{cel}</a>:cel}
                             </TableCell>)}
 
                         </TableRow>

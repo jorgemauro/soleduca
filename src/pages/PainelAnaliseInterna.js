@@ -12,7 +12,7 @@ import {
     CardHeader,
     CardMedia,
     Divider,
-    Drawer, Icon, IconButton,
+    Drawer, Icon, IconButton, InputLabel,
     List,
     ListItem,
     ListItemIcon,
@@ -88,6 +88,69 @@ const rowsIncidencia = [
         cel: ['14', 'Formas de organização social, movimentos sociais, pensamento político e ação do Estado: Ditaduras políticas na América Latina: Estado Novo no Brasil e ditaduras na América.', '2.65%']
     }
 ];
+
+const rowsEstudante = [
+    {
+        id: 0,
+        cel: ['13', '1', '4810625', 'Roberto Assis', '805,5', '566,0', '717', '669,87', '840', '719', '719', 'relatorio']
+    },
+    {
+        id: 1,
+        cel: ['18', '2', '4810626', 'Melissa', '805,5', '566,0', '717', '669,87', '840', '719', '719', 'relatorio']
+    },
+    {
+        id: 2,
+        cel: ['28', '3', '4810627', 'Roberta', '705,5', '665,0', '718', '669,89', '640', '719', '719', 'relatorio']
+    },
+    {id: 3, cel: ['33', '4', '4810628', 'Ingrid', '505,5', '566,0', '717', '669,87', '740', '719', '719', 'relatorio']},
+    {
+        id: 4,
+        cel: ['37', '5', '4810629', 'Jurislete', '806,5', '566,0', '717', '669,87', '850', '719', '719', 'relatorio']
+    },
+    {
+        id: 5,
+        cel: ['89', '6', '4810623', 'Roberval', '725,5', '566,0', '717', '669,87', '880', '719', '719', 'relatorio']
+    },
+    {
+        id: 6,
+        cel: ['94', '7', '4810622', 'Tatiana', '735,5', '566,0', '717', '669,87', '570', '719', '719', 'relatorio']
+    },
+    {
+        id: 7,
+        cel: ['106', '8', '4810621', 'Ana Tim', '715,5', '566,0', '717', '669,87', '760', '719', '719', 'relatorio']
+    },];
+
+
+const rowsEstudantered = [
+    {
+        id: 0,
+        cel: ['13', '1', '4810625', 'Roberto Assis', 'Redação']
+    },
+    {
+        id: 1,
+        cel: ['18', '2', '4810626', 'Melissa', 'Redação']
+    },
+    {
+        id: 2,
+        cel: ['28', '3', '4810627', 'Roberta', 'Redação']
+    },
+    {id: 3, cel: ['33', '4', '4810628', 'Ingrid','Redação']},
+    {
+        id: 4,
+        cel: ['37', '5', '4810629', 'Jurislete', 'Redação']
+    },
+    {
+        id: 5,
+        cel: ['89', '6', '4810623', 'Roberval', 'Redação']
+    },
+    {
+        id: 6,
+        cel: ['94', '7', '4810622', 'Tatiana','Redação']
+    },
+    {
+        id: 7,
+        cel: ['106', '8', '4810621', 'Ana Tim','Redação']
+    },];
 export default class PainelAnaliseInterna extends React.Component {
     state = {
         painelselected: 0,
@@ -101,11 +164,11 @@ export default class PainelAnaliseInterna extends React.Component {
         this.setState({selectGraph: event.target.value});
     };
     image = (i) => {
-        if (i === 0)
+        if (i === 0 ||i === 7 )
             return comparativo;
         if (i === 1)
             return comparacaoenem;
-        if (i === 2)
+        if (i === 2 ||i === 8 )
             return comparacaoenemoutras;
         if (i === 3)
             return pontosfracos;
@@ -115,6 +178,13 @@ export default class PainelAnaliseInterna extends React.Component {
             return comparacaoenem;
         if (i === 6)
             return comparacaoenem;
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(this.props.select!==nextProps.select&&nextProps.select===4){
+            this.setState({selectGraph:2})
+        }else if(this.props.select!==nextProps.select){
+            this.setState({selectGraph:1})
+        }
     }
 
     render() {
@@ -127,19 +197,22 @@ export default class PainelAnaliseInterna extends React.Component {
                 display: 'flex',
                 flexFlow: 'column',
                 alignItems: 'center',
+                justfyContent:'center',
                 padding: '0 3%',
                 flexWrap: 'wrap'
             }}>{
-                this.props.select === -1 && <Card style={{padding: '5px'}}><h2>Bem vindo aos sitema TRI</h2></Card>
+                this.props.select === -1 && <div style={{padding: '5px'}}><h2>Bem-vindo ao sitema TRI</h2></div>
             }
-                {this.props.select > -1 && <div style={{
+                {this.props.select > -1 && (this.props.select<3||this.props.select===4) && <div style={{
                     backgroundColor: '#ffffff',
                     padding: '10px 5px',
                     display: 'flex',
+                    flexFlow: 'column',
+                    alignItems: 'center',
                     width: '80%',
                     marginBottom: '20px'
                 }}>
-                    <div style={{fontWeight: 'bolder'}}>Areas de conhecimento:</div>
+                    <InputLabel htmlFor="age-simple">Areas de conhecimento</InputLabel>
                     <Select
                         value={this.state.selectGraph}
                         onChange={this.handleChange}
@@ -147,6 +220,7 @@ export default class PainelAnaliseInterna extends React.Component {
                             name: 'Grafico',
                             id: 'age-simple',
                         }}
+                        style={{maxWidth: '150px'}}
                     >
                         <MenuItem value={1}>Ciências da natureza</MenuItem>
                         <MenuItem value={2}>Ciências Humanas</MenuItem>
@@ -155,7 +229,7 @@ export default class PainelAnaliseInterna extends React.Component {
                     </Select>
                 </div>}
                 {/*graficos*/}
-                {this.state.selectGraph === 1 && this.props.select !== 2 && this.props.select > -1 && this.props.select !== 3 && this.props.select !== 4 &&
+                {this.state.selectGraph === 1 && this.props.select !== 2 && this.props.select > -1 && this.props.select < 3 &&
                 <Card style={{
                     width: '50%',
                     height: '30%',
@@ -170,25 +244,7 @@ export default class PainelAnaliseInterna extends React.Component {
                 </Card>
                 }
 
-                {this.state.selectGraph === 1 && this.props.select === 2 && !this.state.itemescolhido &&
-                <Card className="cardHover" style={{
-                    width: '50%',
-                    height: '30%',
-                    display: 'flex',
-                    flexFlow: 'column',
-                    alignItems: 'center',
-                    padding: '1%'
-                }}>
-                    <img style={{width: '100%'}} src={
-                        this.image(this.props.select)
-                    }
-                         onClick={() => {
-                             this.setState({itemescolhido: true})
-                         }}
-                    />
-                </Card>
-                }
-                {this.props.select > -1 && this.state.itemescolhido && !this.state.questaoescolhida && <Card style={{
+                {this.state.selectGraph === 1 && this.props.select === 2 && !this.state.questaoescolhida &&<Card style={{
                     width: '50%',
                     height: '30%',
                     display: 'flex',
@@ -196,9 +252,6 @@ export default class PainelAnaliseInterna extends React.Component {
                     alignItems: 'center',
                     padding: '1%',
                 }}>
-                    <IconButton style={{alignSelf: "self-start"}} onClick={() => {
-                        this.setState({itemescolhido: false})
-                    }}><Icon>close</Icon></IconButton>
                     <img style={{width: '100%'}} src={
                         this.image(3)
                     }
@@ -227,13 +280,65 @@ export default class PainelAnaliseInterna extends React.Component {
                     </div>
                 </Card>
                 }
-                {this.props.select === 4
-                &&
+                {this.props.select === 4&&
                 <Tabela onclick={() => this.setState({detalhetabela: true})}
-                        cabecalho={['Number', 'Descrição', 'incidencia de erro']} rows={rowsIncidencia}/>}
+                        cabecalho={['Number', 'Descrição', 'incidencia de erro']} rows={rowsIncidencia}/>
+                }
                 {this.props.select === 3 &&
-                <Tabela onclick={() => this.setState({detalhetabela: true})}
+                <Tabela  title="Habilidades com maior incidência de erro"  onclick={() => this.setState({detalhetabela: true})}
                         cabecalho={['Area', 'Competência', 'Habilidade', 'Alunos']} rows={rows}/>}
+                {this.props.select === 5 &&
+                <Tabela onclick={() => this.setState({detalhetabela: true})}
+                        cabecalho={['Class Geral', 'Class. Escola', 'RE', 'Nome', 'CH', 'CN', 'LC', 'MT', 'Media sem RD', 'RD', 'Media com RD', 'Relatorio']}
+                        rows={rowsEstudante}/>}
+                {this.props.select === 6 &&
+                <div style={{
+                    display:'flex',
+                    flexWrap:'wrap',
+                    justifyContent:'space-around',
+                    width:'100%'
+                }}>
+                    <Card style={{height:'50px',width:'30%', display:'flex', flexFlow:'column', padding:'5px', marginBottom:'10px', background: '#004265', color:'#ffffff'}}>
+                        <div style={{ display:'flex', alignItems:'center', justifyContente:'center'}}>
+                            <Icon>graphic_eq</Icon> <div style={{fontSize:'1.2em'}}><b>Media da escola:</b> 619.4</div>
+                        </div>
+                        <div style={{marginLeft:'25px'}}>Baseado nas competencias</div>
+                    </Card>
+                    <Card style={{height:'50px',width:'30%', display:'flex', flexFlow:'column', padding:'5px', marginBottom:'10px',color: '#004265'}}>
+                        <div style={{ display:'flex', alignItems:'center', justifyContente:'center'}}>
+                            <Icon>graphic_eq</Icon> <div style={{fontSize:'1.2em'}}><b>Escola:</b> 140 <b>Escola Geral:</b> 124,5</div>
+                        </div>
+                        <div style={{marginLeft:'25px'}}>Competência I -  norma padrão</div>
+                    </Card>
+                    <Card style={{height:'50px',width:'30%', display:'flex', flexFlow:'column', padding:'5px', marginBottom:'10px',color: '#004265'}}>
+                        <div style={{ display:'flex', alignItems:'center', justifyContente:'center'}}>
+                            <Icon>graphic_eq</Icon> <div style={{fontSize:'1.2em'}}><b>Escola:</b> 118,7 <b>Escola Geral:</b> 108,0</div>
+                        </div>
+                        <div style={{marginLeft:'25px'}}>Competência II -  Adequação ao tema</div>
+                    </Card>
+                    <Card style={{height:'50px',width:'30%', display:'flex', flexFlow:'column', padding:'5px', marginBottom:'10px',color: '#004265'}}>
+                        <div style={{ display:'flex', alignItems:'center', justifyContente:'center'}}>
+                            <Icon>graphic_eq</Icon> <div style={{fontSize:'1.2em'}}><b>Escola:</b> 120,0 <b>Escola Geral:</b> 104,5</div>
+                        </div>
+                        <div style={{marginLeft:'25px'}}>Competência III -  Seleção/Organização dos argumentos</div>
+                    </Card>
+                    <Card style={{height:'50px',width:'30%', display:'flex', flexFlow:'column', padding:'5px', marginBottom:'10px',color: '#004265'}}>
+                        <div style={{ display:'flex', alignItems:'center', justifyContente:'center'}}>
+                            <Icon>graphic_eq</Icon> <div style={{fontSize:'1.2em'}}><b>Escola:</b> 130,3 <b>Escola Geral:</b> 112,5</div>
+                        </div>
+                        <div style={{marginLeft:'25px'}}>Competência IV -  Construção da argumentação</div>
+                    </Card>
+                    <Card style={{height:'50px',width:'30%', display:'flex', flexFlow:'column', padding:'5px', marginBottom:'10px',color: '#004265'}}>
+                        <div style={{ display:'flex', alignItems:'center', justifyContente:'center'}}>
+                            <Icon>graphic_eq</Icon> <div style={{fontSize:'1.2em'}}><b>Escola:</b> 109,7 <b>Escola Geral:</b> 70,0</div>
+                        </div>
+                        <div style={{marginLeft:'25px'}}>Competência V -  Proposta de intervenção</div>
+                    </Card>
+                    <Tabela onclick={() => this.setState({detalhetabela: true})}
+                            cabecalho={['Class Geral', 'Class. Escola', 'RE', 'Nome', 'Redação']}
+                            rows={rowsEstudantered}/>
+                </div>
+                }
                 {this.props.select > -1 && this.state.selectGraph !== 1 && <Card style={{
                     width: '80%',
                     height: '30vh',
